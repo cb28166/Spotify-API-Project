@@ -1,11 +1,14 @@
-import { useState } from 'react'
+import Header from './components/Header/Header';
+import './App.css';
 
 function App() {
   return (
-    <div>
-      {/*Here i put my components i export in to render*/}
+    <div className="appContainer">
+      <div id="header">
+        <Header />
+      </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
