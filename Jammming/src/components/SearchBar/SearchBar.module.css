@@ -1,0 +1,138 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 25vh;
+    /*border: 4px solid black;*/
+    margin: 10px;
+}
+
+.searchBarContainer {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    gap: 20px;
+    align-items: center;
+}
+
+/* Register a custom CSS variable so it animates smoothly */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.searchBar {
+    max-width: 600px;
+    width: 600px;
+    padding: 15px 12px;
+    font-size: 1.1rem;
+    border-radius: 999px;
+    box-sizing: border-box;
+    
+    --angle: 0deg;
+
+    background:
+        linear-gradient(#121212, #121212) padding-box,
+        linear-gradient(
+            var(--angle),
+            #f61cf673,
+            #3df53d,
+            #f61cf673
+        ) border-box;
+
+
+    border: 4px solid transparent;
+
+
+    color: #3df53d;
+    transition: box-shadow 0.3s ease, color 0.3s ease;
+
+    animation: rotateGradient 15s linear infinite;
+}
+
+.searchBar:hover:not(:focus) {
+  animation: rotateGradient 5s linear infinite, pulseGlow 1.6s ease-in-out infinite;
+}
+
+.searchBar:focus {
+  outline: none;
+  /* Keep glow but stop rotation animation */
+  box-shadow: 0 0 12px rgba(199, 125, 255, 0.6);
+  animation: none; /* stops the rotation on focus */
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 8px rgba(199, 125, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(199, 125, 255, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 8px rgba(199, 125, 255, 0.4);
+  }
+}
+
+@keyframes rotateGradient {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
+}
+
+.buttonStyle {
+    width: 300px;
+    padding: 12px 10px;
+    background:
+        linear-gradient(#121212, #121212) padding-box,
+        linear-gradient(
+            var(--angle),
+            #f61cf673,
+            #3df53d
+        ) border-box;
+
+
+    border: 3px solid transparent;
+    border-radius: 999px;
+
+
+    color: #3df53d;
+    font-family: 'Bitcount Single';
+    font-size: large;
+    font-weight: bold;
+}
+
+.buttonStyle:hover:not(:focus) {
+  animation: pulseGlow 1.6s ease-in-out infinite;
+  box-shadow: 0 0 14px rgba(199, 125, 255, 0.7);
+  cursor: pointer;
+  
+}
+
+.buttonStyle:active {
+    background:
+    radial-gradient(
+      circle at top left,
+      rgba(246, 28, 246, 0.45),
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      #3df53d,
+      transparent 55%
+    ),
+    linear-gradient(
+      to bottom,
+      #2a001f,
+      #0a0a0a
+    );
+
+    border: 3px solid black;
+    color: white;
+}
