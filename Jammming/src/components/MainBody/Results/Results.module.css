@@ -1,0 +1,24 @@
+.resultsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    gap: 10px;
+    border: 4px solid black;
+    padding: 12px 15px;
+
+    background: linear-gradient(#121212, #121212) padding-box;
+    color: white;
+    font-family: sans-serif;
+
+    min-width: 600px;
+    min-height: 800px;
+}
+
+.resultsContainer h3 {
+    text-decoration: underline;
+    font-family: 'Bitcount Single';
+    font-weight: bold;
+    font-size: 1.5rem;
+}

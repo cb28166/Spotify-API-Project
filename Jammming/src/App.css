@@ -17,7 +17,7 @@ html, body {
     ),
     radial-gradient(
       circle at bottom right,
-      rgb(61, 245, 61),
+      #3df53d,
       transparent 55%
     ),
     linear-gradient(
@@ -29,4 +29,12 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+}
+
+.mainBody {
+  display: flex;
+  gap: 24px;
+  padding: 20px 50px;
+  justify-content: center;
+  align-items: flex-start;
 }

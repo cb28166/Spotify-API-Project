@@ -24,14 +24,14 @@
     font-family: 'Bitcount Single', sans-serif;
 }
 
-h1 {
+.textContainer h1 {
     font-family: 'Bitcount Single', sans-serif;
     font-weight: bold;
     font-style: oblique;
     margin-bottom: 4px;
 }
 
-p {
+.textContainer p {
     padding-bottom: 10px;
     margin-top: 5px;
     font-family: 'Bitcount Single', sans-serif;
