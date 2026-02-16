@@ -1,0 +1,76 @@
+.trackContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    font-family: sans-serif;
+    width: 100%;
+    font-size: 1.25rem;
+    border-bottom: 2px solid;
+    border-image: linear-gradient(to right, #f61cf673, #3df53d) 1;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+.trackInfo {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-grow: 1;
+}
+
+.addButton {
+    border-radius: 999px;
+    color: white;
+    padding: 5px 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    background:
+        linear-gradient(#121212, #121212) padding-box,
+        linear-gradient(
+            var(--angle),
+            #f61cf673,
+            #3df53d
+        ) border-box;
+
+
+    border: 3px solid transparent;
+}
+
+.addButton:hover:not(:focus) {
+  animation: pulseGlow 1.6s ease-in-out infinite;
+  box-shadow: 0 0 14px rgba(199, 125, 255, 0.7);
+  cursor: pointer;
+  
+}
+
+.addButton:active {
+    background:
+    radial-gradient(
+      circle at top left,
+      rgba(246, 28, 246, 0.45),
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      #3df53d,
+      transparent 55%
+    ),
+    linear-gradient(
+      to bottom,
+      #2a001f,
+      #0a0a0a
+    );
+
+    border: 3px solid black;
+    color: white;
+}
+
+.name {
+    font-weight: bold;
+    font-size: 1.35rem;
+    font-style: italic;
+}

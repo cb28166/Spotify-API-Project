@@ -35,6 +35,14 @@ html, body {
   display: flex;
   gap: 24px;
   padding: 20px 50px;
-  justify-content: center;
+  box-sizing: border-box;
+  
+  height: calc(100vh -  HEADER_HEIGHT); /* dynamically fit viewport minus any header */
+  justify-content: flex-start;
   align-items: flex-start;
+  overflow: hidden; /* prevents spilling */
+}
+
+#results {
+  flex: 1; /* fills available space in mainBody */
 }

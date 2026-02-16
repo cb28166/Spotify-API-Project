@@ -2,23 +2,55 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: stretch;
 
-    gap: 10px;
+    gap: 5px;
     border: 4px solid black;
-    padding: 12px 15px;
+    padding: 5px 15px;
 
     background: linear-gradient(#121212, #121212) padding-box;
     color: white;
     font-family: sans-serif;
 
     min-width: 600px;
-    min-height: 800px;
+    height: 1150px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.resultsContainer h3 {
+.header {
     text-decoration: underline;
     font-family: 'Bitcount Single';
     font-weight: bold;
     font-size: 1.5rem;
 }
+
+.trackList {
+    flex: 1;
+    overflow-y: auto;
+    gap: 10px;
+    padding-right: 12px;
+}
+
+/* Scrollbar width */
+.trackList::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Scrollbar track (background) */
+.trackList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Scrollbar thumb (the draggable part) */
+.trackList::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #1db954, #3df53d);
+  border-radius: 999px;
+  transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.trackList::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #3df53d, #1db954);
+}
+
