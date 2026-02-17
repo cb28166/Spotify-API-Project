@@ -59,6 +59,8 @@
   overflow-y: auto;        /* scroll if too many songs */
   margin-bottom: 16px;     /* spacing before button */
   max-height: 400px;
+  background-color: rgba(255, 255, 255, 0.1);  /* temporary highlight */
+  border: 2px solid red;  
 }
 
 .button {

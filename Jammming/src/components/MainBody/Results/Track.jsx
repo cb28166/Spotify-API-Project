@@ -1,6 +1,6 @@
 import styles from "./Track.module.css";
 
-function Track({ track }) {
+function Track({ track, addTrack }) {
     return (
         <div className={styles.trackContainer}>
             <div className={styles.trackInfo}>
@@ -12,7 +12,7 @@ function Track({ track }) {
             </div>
 
             {/* Right side: add button */}
-            <button className={styles.addButton}>Add</button>
+            <button className={styles.addButton} onClick={() => addTrack(track)}>Add</button>
         </div>
     );
 }
