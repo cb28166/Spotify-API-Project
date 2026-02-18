@@ -1,0 +1,15 @@
+.viewportContainer {
+    display: flex;
+}
+
+.albumCover {
+    height: 400px;
+}
+
+.trackName {
+    font-family: sans-serif;
+}
+
+.artistName {
+    font-family: sans-serif;
+}

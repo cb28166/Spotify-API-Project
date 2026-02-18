@@ -5,12 +5,13 @@ import Viewport from './Viewport';
 import styles from '../PlaylistSection/RightSide.module.css';
 
 
-function RightSide({ playlistTracks, removeTrack }) {
-    const [playlistName, setPlaylistName] = useState("");
+function RightSide({ playlistTracks, removeTrack, savePlaylist, playlistName, setPlaylistName, hoveredTrack }) {
     return (
         <div className={styles.rightContainer}>
             <div className={styles.viewport}>
-                <Viewport />
+                <Viewport 
+                    hoveredTrack={hoveredTrack}
+                />
             </div>
             <div className={styles.playlist}>
                 <Playlist 
@@ -18,6 +19,7 @@ function RightSide({ playlistTracks, removeTrack }) {
                     setPlaylistName={setPlaylistName}
                     tracks={playlistTracks}
                     removeTrack={removeTrack}
+                    savePlaylist={savePlaylist}
                 />
             </div>
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../PlaylistSection/Playlist.module.css';
 
-function Playlist({ playlistName, setPlaylistName, tracks, removeTrack}) {
+function Playlist({ playlistName, setPlaylistName, tracks, removeTrack, savePlaylist }) {
     return (
         <div className={styles.playlistContainer}>
             <form className={styles.playlistForm}>
@@ -20,7 +20,7 @@ function Playlist({ playlistName, setPlaylistName, tracks, removeTrack}) {
                     ) : (
                         tracks.map(track => (
                             <div key={track.id} className={styles.trackRow}>
-                                <span>{track.name} - {track.artist}</span>
+                                <span className={styles.trackName}>{track.name} - {track.artist}</span>
                                 <button
                                     className={styles.deleteButton}
                                     onClick={() => removeTrack(track)}
@@ -33,7 +33,7 @@ function Playlist({ playlistName, setPlaylistName, tracks, removeTrack}) {
                 </div>
 
                 <div className={styles.submitWrapper}>
-                    <button className={styles.button} type="submit">
+                    <button className={styles.button} type="submit" onClick={savePlaylist}>
                         Send to Spotify
                     </button>
                 </div>

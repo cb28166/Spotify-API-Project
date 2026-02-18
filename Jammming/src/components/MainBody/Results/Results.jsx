@@ -3,14 +3,14 @@ import styles from './Results.module.css';
 import Track from './Track';
 
 
-function Results({ tracks = [], addTrack, playlistTracks }) {
+function Results({ tracks = [], addTrack, playlistTracks, setHoveredTrack }) {
     return (
         <div className={styles.resultsContainer}>
             <h3 className={styles.header}>Your Songs:</h3>
 
             <div className={styles.trackList}>
                 {tracks.map(track => (
-                    <Track key={track.id} track={track} addTrack={addTrack} playlistTracks={playlistTracks}/>
+                    <Track key={track.id} track={track} addTrack={addTrack} playlistTracks={playlistTracks} setHoveredTrack={setHoveredTrack}/>
                 ))}
             </div>
         </div>  
