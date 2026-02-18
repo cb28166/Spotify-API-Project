@@ -1,6 +1,9 @@
 import styles from "./Track.module.css";
 
-function Track({ track, addTrack }) {
+function Track({ track, addTrack, playlistTracks = [] }) {
+
+    const isInPlaylist = playlistTracks.some(t => t.id === track.id);
+
     return (
         <div className={styles.trackContainer}>
             <div className={styles.trackInfo}>
@@ -11,8 +14,9 @@ function Track({ track, addTrack }) {
                 <span>{track.album}</span>
             </div>
 
-            {/* Right side: add button */}
-            <button className={styles.addButton} onClick={() => addTrack(track)}>Add</button>
+            {!isInPlaylist && (
+                <button className={styles.addButton} onClick={() => addTrack(track)}>Add</button>
+            )}
         </div>
     );
 }

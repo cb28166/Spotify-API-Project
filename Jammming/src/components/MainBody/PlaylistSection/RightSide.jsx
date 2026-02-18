@@ -5,7 +5,7 @@ import Viewport from './Viewport';
 import styles from '../PlaylistSection/RightSide.module.css';
 
 
-function RightSide({ playlistTracks }) {
+function RightSide({ playlistTracks, removeTrack }) {
     const [playlistName, setPlaylistName] = useState("");
     return (
         <div className={styles.rightContainer}>
@@ -17,6 +17,7 @@ function RightSide({ playlistTracks }) {
                     playlistName={playlistName}
                     setPlaylistName={setPlaylistName}
                     tracks={playlistTracks}
+                    removeTrack={removeTrack}
                 />
             </div>
         </div>

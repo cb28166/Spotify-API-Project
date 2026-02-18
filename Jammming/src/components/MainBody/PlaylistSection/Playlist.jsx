@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../PlaylistSection/Playlist.module.css';
 
-function Playlist({ playlistName, setPlaylistName, tracks}) {
+function Playlist({ playlistName, setPlaylistName, tracks, removeTrack}) {
     return (
         <div className={styles.playlistContainer}>
             <form className={styles.playlistForm}>
@@ -16,12 +16,18 @@ function Playlist({ playlistName, setPlaylistName, tracks}) {
 
                 <div className={styles.songList}>
                     {tracks?.length === 0 ? (
-                        <p>No songs added yet!</p>
+                        <h3>No songs added yet!</h3>
                     ) : (
                         tracks.map(track => (
-                            <p key={track.id}>
-                                {track.name} - {track.artist}
-                            </p>
+                            <div key={track.id} className={styles.trackRow}>
+                                <span>{track.name} - {track.artist}</span>
+                                <button
+                                    className={styles.deleteButton}
+                                    onClick={() => removeTrack(track)}
+                                >
+                                Delete
+                                </button>
+                            </div>
                         ))
                     )}
                 </div>
