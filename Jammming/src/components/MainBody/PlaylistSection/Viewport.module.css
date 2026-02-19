@@ -1,15 +1,72 @@
 .viewportContainer {
     display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    height: 100%;
+}
+
+.viewportContainer h3 {
+    font-size: 1.25rem;
+    font-family: 'Bitcount Single';
+    justify-content: center;
+    align-items: center;
+}
+
+.textContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .albumCover {
-    height: 400px;
+    height: 300px;
+    border-radius: 8px;
 }
 
 .trackName {
     font-family: sans-serif;
+    margin: 0;
+    font-weight: bold;
+    font-size: 1.25rem;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.textWrapper {
+    width: 200px;          /* fixed width */
+    overflow: hidden;
+}
+
+.textContent {
+    display: inline-flex;
+    white-space: nowrap;
+}
+
+.scrolling {
+    animation: scrollLoop 10s linear infinite;
+    will-change: transform;
+    animation-delay: 1s; /* <-- wait 1 second before starting */
+}
+
+.scrolling p {
+    padding-right: 25px;
+}
+
+
+/* Seamless loop */
+@keyframes scrollLoop {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
 .artistName {
     font-family: sans-serif;
+    margin: 5px 0 0 0;
+    opacity: 0.8;
 }

@@ -1,12 +1,26 @@
 import React from 'react';
+import { useRef, useLayoutEffect, useState } from 'react';
 import styles from '../PlaylistSection/Viewport.module.css';
 
 function Viewport({ hoveredTrack }) {
+    const textRef = useRef(null);
+    const[shouldScroll, setShouldScroll] = useState(false);
+
+    useLayoutEffect(() => {
+        setShouldScroll(false);
+
+        if (textRef.current) {
+            const isOverFlowing = textRef.current.scrollWidth > textRef.current.clientWidth;
+            setShouldScroll(isOverFlowing);
+        }
+    }, [hoveredTrack]);
+
+
 
     if (!hoveredTrack) {
         return (
-            <div>
-                <h1>Hover over a song to See the details!</h1>
+            <div className={styles.viewportContainer}>
+                <h3>Hover over a song to See the details!</h3>
             </div>
         );
     }
@@ -21,9 +35,16 @@ function Viewport({ hoveredTrack }) {
                 className={styles.albumCover} 
             />
 
-            {/* Track info */}
-            <h3 className={styles.trackName}>{hoveredTrack.name}</h3>
-            <p className={styles.artistName}>{hoveredTrack.artist}</p>
+            <div className={styles.textContainer}>
+                {/* Track info */}
+                <div className={styles.textWrapper} ref={textRef}>
+                    <div className={`${styles.textContent} ${shouldScroll ? styles.scrolling : ""}`}>
+                        <p className={styles.trackName}>{hoveredTrack.name}</p>
+                        {shouldScroll && <p className={styles.trackName}>{hoveredTrack.name}</p>}
+                    </div>
+                </div>
+                <p className={styles.artistName}>{hoveredTrack.artist}</p>
+            </div>
         </div>
     );
 }
