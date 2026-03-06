@@ -3,9 +3,20 @@ import SearchBar from './components/SearchBar/SearchBar';
 import './App.css';
 import Results from './components/MainBody/Results/Results';
 import RightSide from './components/MainBody/PlaylistSection/RightSide';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
+import Spotify from './utils/Spotify';
 
 function App() {
+
+  useEffect(() => {
+  async function authenticate() {
+    const token = await Spotify.getAccessToken();
+    console.log("Spotify Access Token:", token);
+  }
+
+  authenticate();
+  }, []);
+
   const [searchResults, setSearchResults] = useState([
   {
     id: 1,
@@ -101,7 +112,7 @@ function App() {
 
   const removeTrackFromPlaylist = (track) => {
   setPlaylistTracks(playlistTracks.filter(t => t.id !== track.id));
-};
+  };
 
   const savePlaylist = () => {
     const trackUris = playlistTracks.map(track => track.uri);
