@@ -106,6 +106,51 @@ const Spotify = {
             .replace(/=/g, "")
             .replace(/\+/g, "-")
             .replace(/\//g, "_");
+    },
+
+    async apiRequest(endpoint) {
+        const token = await this.getAccessToken();
+
+        const url = `https://api.spotify.com/v1/${endpoint}`;
+
+        console.log("Spotify request URL: ", url);
+
+        const response = await fetch(`https://api.spotify.com/v1/${endpoint}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            const errorBody = await response.text();
+            console.error("Spotify API error:", errorBody);
+            throw new Error("Spotify API request failed!");
+        }
+
+        return response.json();
+
+    },
+
+
+    async searchTracks(query) {
+
+        const params = new URLSearchParams();
+        params.append("q", query);
+        params.append("type", "track");
+        params.append('limit', 10);
+
+        const endpoint = `search?${params.toString()}`;
+
+        const data = await this.apiRequest(endpoint);
+
+        return data.tracks.items.map(track => ({
+            id: track.id,
+            name: track.name,
+            artist: track.artists.map(a => a.name).join(", "),
+            album: track.album.name,
+            uri: track.uri,
+            albumCover: track.album.images[0]?.url || ""
+        }));
     }
 };
 
