@@ -7,7 +7,8 @@ const redirectUri =
 let accessToken = "";
 
 const Spotify = {
-    
+
+    //get the actual token from spotify API
     async getAccessToken() {
         const storedToken = localStorage.getItem("access_token");
         const storedExpiration = localStorage.getItem("expiration_time");
