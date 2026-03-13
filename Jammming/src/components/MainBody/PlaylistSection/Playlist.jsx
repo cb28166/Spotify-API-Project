@@ -33,7 +33,7 @@ function Playlist({ playlistName, setPlaylistName, tracks, removeTrack, savePlay
                 </div>
 
                 <div className={styles.submitWrapper}>
-                    <button className={styles.button} type="submit" onClick={savePlaylist}>
+                    <button className={styles.button} type="button" onClick={savePlaylist}>
                         Send to Spotify
                     </button>
                 </div>

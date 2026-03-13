@@ -24,8 +24,8 @@ function App() {
     }
   }
 
-  initializeSpotify();
-}, []);
+    initializeSpotify();
+  }, []);
 
 
 
@@ -46,12 +46,18 @@ function App() {
   setPlaylistTracks(playlistTracks.filter(t => t.id !== track.id));
   };
 
-  const savePlaylist = () => {
-    const trackUris = playlistTracks.map(track => track.uri);
-    alert("Saved your playlist: " + playlistName);
-    console.log("Saved URIS:" + trackUris);
-    setPlaylistTracks([]);
-    setPlaylistName("");
+  const savePlaylist = async () => {
+    const trackUris = playlistTracks.map(t => t.uri);
+
+    try {
+      await Spotify.savePlaylistName(playlistName, trackUris);
+      alert(`Playlist "${playlistName}" saved to Spotify!`);
+      setPlaylistTracks([]);
+      setPlaylistName("");
+    } catch (error) {
+      console.error("Failed to save playlist:", error);
+      alert("Failed to save playlist. Check console for details.");
+    }
   };
 
   const handleSearch = async (query) => {
