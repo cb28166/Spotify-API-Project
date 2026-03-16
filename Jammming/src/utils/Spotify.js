@@ -58,25 +58,13 @@ const Spotify = {
     async exchangeCodeForToken(code) {
         const codeVerifier = localStorage.getItem("code_verifier");
 
-        const body = new URLSearchParams({
-            client_id: clientId,
-            grant_type: "authorization_code",
-            code: code,
-            redirect_uri: redirectUri,
-            code_verifier: codeVerifier
-        });
-
-        const response = await fetch("https://accounts.spotify.com/api/token", {
+        const response = await fetch("http://localhost:8888/exchange_token", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body: body
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ code, code_verifier: codeVerifier })
         });
 
-        if (!response.ok) {
-            throw new Error("Failed to fetch access token");
-        }
+        if (!response.ok) throw new Error("Failed to fetch access token");
 
         const data = await response.json();
         accessToken = data.access_token;
@@ -85,9 +73,7 @@ const Spotify = {
         localStorage.setItem("access_token", accessToken);
         localStorage.setItem("expiration_time", expirationTime);
 
-        // Clean URL for safety
         window.history.replaceState({}, document.title, redirectUri);
-
         return accessToken;
     },
 
