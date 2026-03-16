@@ -114,18 +114,19 @@ const Spotify = {
 
     async apiRequest(endpoint, method = "GET", body = null) {
         const token = await this.getAccessToken();
-
         const url = `https://api.spotify.com/v1/${endpoint}`;
 
         console.log("Spotify request URL:", url);
 
+        const headers = { Authorization: `Bearer ${token}` };
+        if (body && method !== "GET") {
+            headers["Content-Type"] = "application/json";
+        }
+
         const response = await fetch(url, {
-            method: method,
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json"
-            },
-            body: body ? JSON.stringify(body) : null
+            method,
+            headers,
+            body: body && method !== "GET" ? JSON.stringify(body) : null
         });
 
         if (!response.ok) {
@@ -134,9 +135,7 @@ const Spotify = {
             throw new Error("Spotify API request failed!");
         }
 
-        if (response.status === 204) {
-            return {};
-        }
+        if (response.status === 204) return {};
 
         return response.json();
     },
@@ -180,6 +179,9 @@ const Spotify = {
             );
 
             console.log("Playlist response:", playlist);
+
+            // After creating playlist
+            await new Promise(resolve => setTimeout(resolve, 1000)); // wait 1 second
 
             const playlistId = playlist.id;
             console.log("Playlist ID:", playlistId);
