@@ -67,6 +67,10 @@ const Spotify = {
         if (!response.ok) throw new Error("Failed to fetch access token");
 
         const data = await response.json();
+
+        // <<< Add this log to inspect the token and scopes
+        console.log("Token response from backend:", data);
+
         accessToken = data.access_token;
 
         const expirationTime = Date.now() + data.expires_in * 1000;
