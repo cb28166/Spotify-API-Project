@@ -58,7 +58,7 @@ const Spotify = {
     async exchangeCodeForToken(code) {
         const codeVerifier = localStorage.getItem("code_verifier");
 
-        const response = await fetch("http://localhost:8888/exchange_token", {
+        const response = await fetch("https://jammming-backend-ouju.onrender.com/exchange_token", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ code, code_verifier: codeVerifier })
