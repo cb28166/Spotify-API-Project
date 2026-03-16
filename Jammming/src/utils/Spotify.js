@@ -1,4 +1,4 @@
-const clientId = "e346aa5709f44eda9d28c3f154afc093";
+const clientId = "e346aa5709f44eda9d28c3f154afc093"; 
 const redirectUri =
   window.location.hostname === "cb28166.github.io"
     ? "https://cb28166.github.io/Spotify-API-Project/"
@@ -118,15 +118,19 @@ const Spotify = {
 
         console.log("Spotify request URL:", url);
 
-        const headers = { Authorization: `Bearer ${token}` };
-        if (body && method !== "GET") {
+        const headers = {
+            Authorization: `Bearer ${token}`,
+        };
+
+        // Only include Content-Type if sending a JSON body
+        if (body) {
             headers["Content-Type"] = "application/json";
         }
 
         const response = await fetch(url, {
             method,
             headers,
-            body: body && method !== "GET" ? JSON.stringify(body) : null
+            body: body ? JSON.stringify(body) : null
         });
 
         if (!response.ok) {
@@ -135,11 +139,11 @@ const Spotify = {
             throw new Error("Spotify API request failed!");
         }
 
+        // No content
         if (response.status === 204) return {};
 
         return response.json();
     },
-
 
     async searchTracks(query) {
 
@@ -191,11 +195,11 @@ const Spotify = {
             const me = await this.apiRequest("me");
             console.log("Playlist owner ID:", playlist.owner.id, "Token belongs to user ID:", me.id);
 
-            // Add tracks using JSON body method (array directly)
+             // 2. Add tracks via query string instead of body
+            const urisParam = encodeURIComponent(trackUris.join(','));
             const addTracksResponse = await this.apiRequest(
-                `playlists/${playlistId}/tracks`,
-                "POST",
-                { uris: trackUris } // <-- pass the array directly
+                `playlists/${playlistId}/tracks?uris=${urisParam}`,
+                "POST"
             );
 
             console.log("Tracks added response:", addTracksResponse);
