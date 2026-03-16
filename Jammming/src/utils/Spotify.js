@@ -145,36 +145,45 @@ const Spotify = {
     },
 
     async savePlaylistName(name, trackUris) {
-        if (!name || !trackUris.length) return;
+    if (!name || !trackUris.length) return;
 
-        try {
-            const token = await this.getAccessToken();
-            console.log("Token being used to add tracks:", token);
+    try {
+        // Ensure all URIs are valid Spotify track URIs
+        const validUris = trackUris.filter(uri => uri.startsWith("spotify:track:"));
+        if (validUris.length === 0) {
+            console.error("No valid track URIs provided.");
+            return;
+        }
 
-            const playlist = await this.apiRequest(
-                "me/playlists",
-                "POST",
-                { name: name, public: true }
-            );
+        // Get token (will trigger login if none/fresh token)
+        const token = await this.getAccessToken();
+        console.log("Token being used to add tracks:", token);
 
-            console.log("Playlist response:", playlist);
+        // Create the playlist
+        const playlist = await this.apiRequest(
+            "me/playlists",
+            "POST",
+            { name: name, public: true }
+        );
 
-            await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1s
+        console.log("Playlist response:", playlist);
 
-            const playlistId = playlist.id;
-            console.log("Playlist ID:", playlistId);
-            console.log("Track URIs:", trackUris);
+        const playlistId = playlist.id;
+        console.log("Playlist ID:", playlistId);
+        console.log("Track URIs:", validUris);
 
-            const me = await this.apiRequest("me");
-            console.log("Playlist owner ID:", playlist.owner.id, "Token belongs to user ID:", me.id);
+        // Double-check the playlist belongs to the user
+        const me = await this.apiRequest("me");
+        console.log("Playlist owner ID:", playlist.owner.id, "Token belongs to user ID:", me.id);
 
-            const urisParam = encodeURIComponent(trackUris.join(','));
-            const addTracksResponse = await this.apiRequest(
-                `playlists/${playlistId}/tracks?uris=${urisParam}`,
-                "POST"
-            );
+        // Add tracks using JSON body method (recommended)
+        const addTracksResponse = await this.apiRequest(
+            `playlists/${playlistId}/tracks`,
+            "POST",
+            { uris: validUris }
+        );
 
-            console.log("Tracks added response:", addTracksResponse);
+        console.log("Tracks added response:", addTracksResponse);
 
         } catch (error) {
             console.error("Error saving playlist:", error);
