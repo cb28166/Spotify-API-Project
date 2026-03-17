@@ -186,7 +186,7 @@ const Spotify = {
 
         // Add tracks using JSON body method (recommended)
         const addTracksResponse = await this.apiRequest(
-            `playlists/${playlistId}/tracks`,
+            `playlists/${playlistId}/items`,
             "POST",
             { uris: validUris }
         );
