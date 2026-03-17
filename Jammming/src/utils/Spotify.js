@@ -180,6 +180,10 @@ const Spotify = {
         const me = await this.apiRequest("me");
         console.log("Playlist owner ID:", playlist.owner.id, "Token belongs to user ID:", me.id);
 
+
+        console.log("Adding tracks to playlist:", playlistId);
+        console.log("Token being used to add tracks:", accessToken);
+
         // Add tracks using JSON body method (recommended)
         const addTracksResponse = await this.apiRequest(
             `playlists/${playlistId}/tracks`,
